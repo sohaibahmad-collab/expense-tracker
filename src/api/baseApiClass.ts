@@ -1,5 +1,6 @@
 import axios, {type AxiosInstance,type AxiosResponse } from "axios";
 
+
 export default class baseApiClient {
   protected api: AxiosInstance;
 
@@ -20,6 +21,7 @@ export default class baseApiClient {
 
   // ✅ POST
   public async post<T>(url: string, data: any): Promise<T> {
+       console.log("Sending data:", data);
     const response: AxiosResponse<T> = await this.api.post(url, data);
     return response.data;
   }

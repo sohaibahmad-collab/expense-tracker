@@ -1,16 +1,15 @@
-type ButtonProps = {
-  children: React.ReactNode;
+interface IButtonProps {
+  buttonText: string;
   onClick?: () => void;
   variant?: "primary" | "danger";
-  className?: string;
-};
+}
 
 export default function Button({
-  children,
+  buttonText,
   onClick,
   variant = "primary",
-  className = "",
-}: ButtonProps) {
+
+}: IButtonProps) {
   const base =
     "px-3 py-1 rounded-lg text-white font-medium transition";
 
@@ -22,9 +21,9 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${base} ${variants[variant]} ${className}`}
+      className={`${base} ${variants[variant]}`}
     >
-      {children}
+      {buttonText}
     </button>
   );
 }

@@ -1,14 +1,15 @@
-// src/store/slices/expensesSlice.ts
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Expense } from "../../types/expense";
 
-interface ExpensesState {
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Expense } from "@src/types/expense";
+import { toast } from "react-toastify";
+
+interface IExpensesState {
   items: Expense[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: ExpensesState = {
+const initialState: IExpensesState = {
   items: [],
   loading: false,
   error: null,
@@ -32,14 +33,17 @@ const expensesSlice = createSlice({
 
     addExpenseRequest: (state, _action: PayloadAction<Omit<Expense, "id">>) => {
       state.loading = true;
+      
     },
     addExpenseSuccess: (state, action: PayloadAction<Expense>) => {
       state.items.push(action.payload);
       state.loading = false;
+      // toast.success("Expense added successfully!");
     },
     addExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
+      // toast.error("Failed to add expense");
     },
 
     updateExpenseRequest: (
@@ -53,10 +57,12 @@ const expensesSlice = createSlice({
         exp.id === action.payload.id ? action.payload : exp
       );
       state.loading = false;
+      // toast.success("Expense updated successfully!");
     },
     updateExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
+      // toast.error("Failed to update expense");
     },
 
     deleteExpenseRequest: (state, _action: PayloadAction<string>) => {
@@ -65,10 +71,12 @@ const expensesSlice = createSlice({
     deleteExpenseSuccess: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((exp) => exp.id !== action.payload);
       state.loading = false;
+      // toast.success("Expense deleted successfully!");
     },
     deleteExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
+      // toast.error("Failed to delete expense");
     },
   },
 });

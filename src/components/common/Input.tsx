@@ -1,20 +1,18 @@
-type InputProps = {
+interface IInputProps {
   label: string;
   type?: "text" | "number";
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  className?: string;
-};
 
+}
 export default function Input({
   label,
   type = "text",
   value,
   onChange,
   placeholder,
-  className = "",
-}: InputProps) {
+}: IInputProps) {
   return (
     <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -25,7 +23,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 ${className}`}
+        className={`w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 `}
       />
     </div>
   );
