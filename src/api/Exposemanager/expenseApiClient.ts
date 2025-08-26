@@ -1,4 +1,4 @@
-// 
+
 
 import BaseApiClient from "@src/api/baseApiClass";
 import type { Expense } from "@src/types/expense";
