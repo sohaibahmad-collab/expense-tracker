@@ -15,7 +15,7 @@ import {
   deleteExpenseFailure,
 } from "@src/store/slices/expenseSlice";
 import type { IExpense } from "@src/types/expense";
-import expenseApiClient from "@src/api/expensemanager/expenseApiClient";
+import expenseApiClient from "@src/api/expense-manager/expenseApiClient";
 import type { RootState } from "@src/store/store";
 
 const client = new expenseApiClient();
