@@ -1,1 +1,8 @@
-export const API_BASE_URL = "https://crudcrud.com/api/87e99b8244d5408a914959bf04ae61b9";
+
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
+export const API_URL_PATHS = {
+  expense: "/expenses",
+
+};

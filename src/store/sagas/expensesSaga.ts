@@ -1,6 +1,6 @@
 // src/store/sagas/expensesSaga.ts
 import { call, put, select, takeLatest, all } from "redux-saga/effects";
-import { API_BASE_URL } from "@src/config";
+
 
 import {toast } from 'react-toastify'
 
@@ -23,7 +23,7 @@ import expenseApiClient from "@src/api/Exposemanager/expenseApiClient";
 import type  { RootState } from "@src/store/store";
 
 
-const client = new expenseApiClient(API_BASE_URL); 
+const client = new expenseApiClient(); 
 
 
 const selectExpenses = (state: RootState) => state.expenses.items;

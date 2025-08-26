@@ -1,44 +1,95 @@
-import axios, {type AxiosInstance,type AxiosResponse } from "axios";
+// import axios, {type AxiosInstance,type AxiosResponse } from "axios";
 
 
-export default class baseApiClient {
+// export default class baseApiClient {
+//   protected api: AxiosInstance;
+
+//   constructor(baseURL: string) {
+//     this.api = axios.create({
+//       baseURL,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
+
+//   // ✅ GET
+//   public async get<T>(url: string): Promise<T> {
+//     const response: AxiosResponse<T> = await this.api.get(url);
+//     return response.data;
+//   }
+
+//   // ✅ POST
+//   public async post<T>(url: string, data: any): Promise<T> {
+//        console.log("Sending data:", data);
+//     const response: AxiosResponse<T> = await this.api.post(url, data);
+//     return response.data;
+//   }
+
+//   // ✅ PUT
+//   public async put<T>(url: string, data: any): Promise<T> {
+//     const response: AxiosResponse<T> = await this.api.put(url, data);
+//     return response.data;
+//   }
+
+//   // ✅ PATCH
+//   public async patch<T>(url: string, data: any): Promise<T> {
+//     const response: AxiosResponse<T> = await this.api.patch(url, data);
+//     return response.data;
+//   }
+
+//   // ✅ DELETE
+//   public async delete<T>(url: string): Promise<T> {
+//     const response: AxiosResponse<T> = await this.api.delete(url);
+//     return response.data;
+//   }
+// }
+
+
+import axios, { type AxiosInstance, type AxiosResponse } from "axios";
+
+export default class BaseApiClient {
   protected api: AxiosInstance;
 
-  constructor(baseURL: string) {
+  // ✅ Store base URL inside parent class
+  protected static readonly BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  constructor() {
+
     this.api = axios.create({
-      baseURL,
+      baseURL: BaseApiClient.BASE_URL, // use static BASE_URL
       headers: {
         "Content-Type": "application/json",
       },
     });
+    console.log("Axios base URL:", this.api.defaults.baseURL);
   }
 
-  // ✅ GET
+  // GET
   public async get<T>(url: string): Promise<T> {
     const response: AxiosResponse<T> = await this.api.get(url);
     return response.data;
   }
 
-  // ✅ POST
+  // POST
   public async post<T>(url: string, data: any): Promise<T> {
-       console.log("Sending data:", data);
     const response: AxiosResponse<T> = await this.api.post(url, data);
     return response.data;
   }
 
-  // ✅ PUT
+  // PUT
   public async put<T>(url: string, data: any): Promise<T> {
     const response: AxiosResponse<T> = await this.api.put(url, data);
     return response.data;
   }
 
-  // ✅ PATCH
+  // PATCH
   public async patch<T>(url: string, data: any): Promise<T> {
     const response: AxiosResponse<T> = await this.api.patch(url, data);
     return response.data;
   }
 
-  // ✅ DELETE
+  // DELETE
   public async delete<T>(url: string): Promise<T> {
     const response: AxiosResponse<T> = await this.api.delete(url);
     return response.data;
