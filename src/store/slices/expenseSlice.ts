@@ -1,10 +1,9 @@
-
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Expense } from "@src/types/expense";
-import { toast } from "react-toastify";
+import type { IExpense } from "@src/types/expense";
+
 
 interface IExpensesState {
-  items: Expense[];
+  items: IExpense[];
   loading: boolean;
   error: string | null;
 }
@@ -22,7 +21,7 @@ const expensesSlice = createSlice({
     fetchExpensesRequest: (state) => {
       state.loading = true;
     },
-    fetchExpensesSuccess: (state, action: PayloadAction<Expense[]>) => {
+    fetchExpensesSuccess: (state, action: PayloadAction<IExpense[]>) => {
       state.items = action.payload;
       state.loading = false;
     },
@@ -31,38 +30,38 @@ const expensesSlice = createSlice({
       state.loading = false;
     },
 
-    addExpenseRequest: (state, _action: PayloadAction<Omit<Expense, "id">>) => {
+    addExpenseRequest: (state, _action: PayloadAction<Omit<IExpense, "id">>) => {
       state.loading = true;
       
     },
-    addExpenseSuccess: (state, action: PayloadAction<Expense>) => {
+    addExpenseSuccess: (state, action: PayloadAction<IExpense>) => {
       state.items.push(action.payload);
       state.loading = false;
-      // toast.success("Expense added successfully!");
+     
     },
     addExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-      // toast.error("Failed to add expense");
+      
     },
 
     updateExpenseRequest: (
       state,
-      _action: PayloadAction<{ id: string; updated: Partial<Expense> }>
+      _action: PayloadAction<{ id: string; updated: Partial<IExpense> }>
     ) => {
       state.loading = true;
     },
-    updateExpenseSuccess: (state, action: PayloadAction<Expense>) => {
+    updateExpenseSuccess: (state, action: PayloadAction<IExpense>) => {
       state.items = state.items.map((exp) =>
         exp.id === action.payload.id ? action.payload : exp
       );
       state.loading = false;
-      // toast.success("Expense updated successfully!");
+      
     },
     updateExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-      // toast.error("Failed to update expense");
+     
     },
 
     deleteExpenseRequest: (state, _action: PayloadAction<string>) => {
@@ -71,12 +70,12 @@ const expensesSlice = createSlice({
     deleteExpenseSuccess: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((exp) => exp.id !== action.payload);
       state.loading = false;
-      // toast.success("Expense deleted successfully!");
+      
     },
     deleteExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-      // toast.error("Failed to delete expense");
+     
     },
   },
 });

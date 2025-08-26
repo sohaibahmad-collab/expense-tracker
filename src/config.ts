@@ -1,5 +1,3 @@
-
-
 function validateEnvVar(name: string): string {
   const value = import.meta.env[name] as string | undefined;
 

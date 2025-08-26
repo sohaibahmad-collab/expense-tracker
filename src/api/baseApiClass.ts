@@ -1,6 +1,3 @@
-
-
-
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 
 export default class BaseApiClient {

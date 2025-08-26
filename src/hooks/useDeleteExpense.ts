@@ -6,7 +6,7 @@ export const useDeleteExpense = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (id: string) => {
-    console.log("Deleting expense with id:", id);
+  
     dispatch(deleteExpenseRequest(id));
   };
 };

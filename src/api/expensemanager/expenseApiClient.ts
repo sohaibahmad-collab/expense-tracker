@@ -1,5 +1,3 @@
-
-
 import BaseApiClient from "@src/api/baseApiClass";
 import type { IExpense } from "@src/types/expense";
 import { API_URL_PATHS } from "@src/config";
@@ -8,13 +6,14 @@ export default class ExpenseApiClient extends BaseApiClient {
   private resourceUrl = API_URL_PATHS.expense;
 
   constructor() {
-     console.log("Base URL:", BaseApiClient.BASE_URL)
-    super(); // no need to pass base URL, parent already knows it
+    super();
   }
 
   async getExpenses(): Promise<IExpense[]> {
-    const data = await this.get<(IExpense & { _id: string })[]>(this.resourceUrl);
-    return data.map(exp => ({
+    const data = await this.get<(IExpense & { _id: string })[]>(
+      this.resourceUrl
+    );
+    return data.map((exp) => ({
       id: exp._id,
       name: exp.name,
       amount: exp.amount,
@@ -22,19 +21,33 @@ export default class ExpenseApiClient extends BaseApiClient {
   }
 
   async getExpense(id: string): Promise<IExpense> {
-    const data = await this.get<IExpense & { _id: string }>(`${this.resourceUrl}/${id}`);
+    const data = await this.get<IExpense & { _id: string }>(
+      `${this.resourceUrl}/${id}`
+    );
     return { id: data._id, name: data.name, amount: data.amount };
   }
 
   async addExpense(expense: Omit<IExpense, "id">): Promise<IExpense> {
-    const data = await this.post<IExpense & { _id: string }>(this.resourceUrl, expense);
+    const data = await this.post<IExpense & { _id: string }>(
+      this.resourceUrl,
+      expense
+    );
     return { id: data._id, name: data.name, amount: data.amount };
   }
 
-  async updateExpense(id: string, expense: Partial<IExpense>): Promise<IExpense> {
-    const { id: _, ...withoutId } = expense;
-    const data = await this.put<IExpense & { _id?: string }>(`${this.resourceUrl}/${id}`, withoutId);
-    return { id: data._id ?? id, name: data.name ?? expense.name!, amount: data.amount ?? expense.amount! };
+  async updateExpense(
+    id: string,
+    expense: Partial<IExpense>
+  ): Promise<IExpense> {
+    const data = await this.put<IExpense & { _id?: string }>(
+      `${this.resourceUrl}/${id}`,
+      expense
+    );
+    return {
+      id: data._id ?? id,
+      name: data.name ?? expense.name!,
+      amount: data.amount ?? expense.amount!,
+    };
   }
 
   async deleteExpense(id: string): Promise<void> {

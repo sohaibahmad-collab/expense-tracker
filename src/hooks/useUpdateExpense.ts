@@ -7,7 +7,6 @@ export const useUpdateExpense = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (id: string, updated: Partial<IExpense>) => {
-    // console.log("Updating expense with id:", id, "and data:", updated);
     dispatch(updateExpenseRequest({ id, updated }));
   };
 };
