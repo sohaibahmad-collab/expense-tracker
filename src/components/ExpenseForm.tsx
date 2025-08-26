@@ -6,10 +6,10 @@ import { useAddExpense } from "@src/hooks/useAddExpense";
 
 export default function ExpenseForm() {
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState<number>(0);
   const addExpense = useAddExpense();
 
-  const handleAddExpense = () => {
+  const handleAddExpense = (name:string,amount:Number) => {
     if (!name || !amount) return;
 
     addExpense({
@@ -19,7 +19,7 @@ export default function ExpenseForm() {
 
    
     setName("");
-    setAmount("");
+    setAmount(0);
   };
 
   return (
@@ -38,11 +38,11 @@ export default function ExpenseForm() {
         type="number"
         value={amount}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setAmount(e.target.value)
+          setAmount(e.target.value ? parseFloat(e.target.value) : 0)
         }
         placeholder="Amount"
       />
-      <Button onClick={handleAddExpense} buttonText="Add Expense">
+      <Button onClick={()=>handleAddExpense(name,amount)} buttonText="Add Expense">
       </Button>
     </div>
   );

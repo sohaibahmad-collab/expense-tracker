@@ -1,13 +1,13 @@
 
 
-import ExpenseItem from "./ExpenseItem";
+import ExpenseItem from "@src/components/ExpenseItem";
 import { useExpensesSelector } from  "@src/hooks/useExpensesSelector";
 
 
 
 export default function ExpenseList() {
 
-   let expenses = useExpensesSelector();
+   const expenses = useExpensesSelector();
   return (
     <div>
       <h2 className="text-lg font-medium mb-3">Expenses</h2>

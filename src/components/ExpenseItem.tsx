@@ -1,26 +1,25 @@
 import { useState } from "react";
-import type { Expense } from "@src/types/expense";
+import type { IExpense } from "@src/types/expense";
 import Input from "@src/components/common/Input";
 import Button from "@src/components/common/Button";
 import { useDeleteExpense } from "@src/hooks/useDeleteExpense";
 import { useUpdateExpense } from "@src/hooks/useUpdateExpense";
-type ExpenseItemProps = {
-  expense: Expense;
-};
+interface IExpenseItemProps {
+  expense: IExpense;
+}
 
 export default function ExpenseItem({
   expense,
-}: ExpenseItemProps) {
+}: IExpenseItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(expense.name);
   const [editAmount, setEditAmount] = useState(expense.amount.toString());
 
-  const deleteExpense = useDeleteExpense();
-  const updateExpense = useUpdateExpense();
+ 
 
-  const handleSave = () => {
+  const handleSave = (editName:string,editAmount:string) => {
     if (!editName || !editAmount) return;
-    updateExpense(expense.id, { name: editName, amount: parseFloat(editAmount) });
+    useUpdateExpense()(expense.id, { name: editName, amount: parseFloat(editAmount) })
     setIsEditing(false);
   };
 
@@ -40,7 +39,7 @@ export default function ExpenseItem({
             value={editAmount}
             onChange={(e) => setEditAmount(e.target.value)}
           />
-          <Button onClick={handleSave} buttonText="Save"></Button>
+          <Button onClick={()=>handleSave(editName,editAmount)} buttonText="Save"></Button>
         </div>
       ) : (
         <>
@@ -50,7 +49,7 @@ export default function ExpenseItem({
           </div>
           <div className="flex gap-2 ml-4">
             <Button onClick={() => setIsEditing(true)} buttonText="Update"></Button>
-            <Button onClick={() => deleteExpense(expense.id)} variant="danger" buttonText="Delete">
+            <Button onClick={() => useDeleteExpense()(expense.id)} variant="danger" buttonText="Delete">
             </Button>
           </div>
         </>

@@ -10,8 +10,7 @@ export default function Button({
   variant = "primary",
 
 }: IButtonProps) {
-  const base =
-    "px-3 py-1 rounded-lg text-white font-medium transition";
+ 
 
   const variants = {
     primary: "bg-blue-500 hover:bg-blue-600",
@@ -21,7 +20,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${base} ${variants[variant]}`}
+      className={` "px-3 py-1 rounded-lg text-white font-medium transition"${variants[variant]}`}
     >
       {buttonText}
     </button>
