@@ -75,7 +75,7 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
               />
             )}
           />
-          <div>
+          <div className="mb-4">
             <Button type="submit" buttonText="Save" disabled={!isValid} />
           </div>
         </form>
