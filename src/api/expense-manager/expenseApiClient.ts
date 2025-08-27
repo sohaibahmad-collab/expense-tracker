@@ -1,38 +1,37 @@
 import BaseApiClient from "@src/api/baseApiClass";
 import type { IExpense } from "@src/types/expense";
-import { API_URL_PATHS } from "@src/config";
+import { API_BASE_URL, API_URL_PATHS } from "@src/config";
+import { transformId, transformArray } from "@src/utils/transform";
+
+
 
 export default class ExpenseApiClient extends BaseApiClient {
-  private resourceUrl = API_URL_PATHS.expense;
+  private static resourceUrl = API_BASE_URL+API_URL_PATHS.expense;
 
   constructor() {
-    super();
+    super(ExpenseApiClient.resourceUrl);
   }
 
   async getExpenses(): Promise<IExpense[]> {
     const data = await this.get<(IExpense & { _id: string })[]>(
-      this.resourceUrl
+      ExpenseApiClient.resourceUrl
     );
-    return data.map((exp) => ({
-      id: exp._id,
-      name: exp.name,
-      amount: exp.amount,
-    }));
+    return transformArray(data);
   }
 
   async getExpense(id: string): Promise<IExpense> {
     const data = await this.get<IExpense & { _id: string }>(
-      `${this.resourceUrl}/${id}`
+      `${ExpenseApiClient.resourceUrl}/${id}`
     );
-    return { id: data._id, name: data.name, amount: data.amount };
+    return transformId(data);
   }
 
   async addExpense(expense: Omit<IExpense, "id">): Promise<IExpense> {
     const data = await this.post<IExpense & { _id: string }>(
-      this.resourceUrl,
+      ExpenseApiClient.resourceUrl,
       expense
     );
-    return { id: data._id, name: data.name, amount: data.amount };
+    return transformId(data);
   }
 
   async updateExpense(
@@ -40,17 +39,13 @@ export default class ExpenseApiClient extends BaseApiClient {
     expense: Partial<IExpense>
   ): Promise<IExpense> {
     const data = await this.put<IExpense & { _id?: string }>(
-      `${this.resourceUrl}/${id}`,
+      `${ExpenseApiClient.resourceUrl}/${id}`,
       expense
     );
-    return {
-      id: data._id ?? id,
-      name: data.name ?? expense.name!,
-      amount: data.amount ?? expense.amount!,
-    };
+    return transformId(data);
   }
 
   async deleteExpense(id: string): Promise<void> {
-    return this.delete<void>(`${this.resourceUrl}/${id}`);
+    return this.delete<void>(`${ExpenseApiClient.resourceUrl}/${id}`);
   }
 }
