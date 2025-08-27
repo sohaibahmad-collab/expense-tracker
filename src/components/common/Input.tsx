@@ -26,7 +26,9 @@ export default function Input({
         placeholder={placeholder}
         className={`w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 `}
       />
+      <div className="h-5 mt-1">
       {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      </div>
     </div>
   );
 }

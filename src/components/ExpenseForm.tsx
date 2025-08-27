@@ -62,7 +62,9 @@ export default function ExpenseForm() {
           )}
         />
 
-        <Button type="submit" buttonText="Add Expense" disabled={!isValid} />
+        <div className="flex justify-center">
+          <Button type="submit" buttonText="Add Expense" disabled={!isValid} />
+        </div>
       </form>
     </div>
   );

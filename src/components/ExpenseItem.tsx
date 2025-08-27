@@ -70,21 +70,25 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
               />
             )}
           />
+          <div>
           <Button type="submit" buttonText="Save" disabled={!isValid} />
+           <div className="h-5 mt-1"></div>
+          </div>
         </form>
       ) : (
         <>
           <div className="flex justify-between w-full">
             <span>{expense.name}</span>
             <span>${expense.amount.toFixed(2)}</span>
-          </div>
+          
           <div className="flex gap-2 ml-4">
-            <Button onClick={() => setIsEditing(true)} buttonText="Edit" />
+            <Button onClick={() => setIsEditing(true)} icon="edit" />
             <Button
               onClick={() => deleteExpense(expense.id)}
               variant="danger"
-              buttonText="Delete"
+              icon="delete"
             />
+          </div>
           </div>
         </>
       )}
