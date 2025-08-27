@@ -14,7 +14,7 @@ export default class BaseApiClient {
         "Content-Type": "application/json",
       },
     });
-    console.log("Axios base URL:", this.api.defaults.baseURL);
+    
   }
 
   
