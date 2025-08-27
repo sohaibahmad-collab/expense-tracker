@@ -3,10 +3,8 @@ import type { IExpense } from "@src/types/expense";
 import { API_BASE_URL, API_URL_PATHS } from "@src/config";
 import { transformId, transformArray } from "@src/utils/transform";
 
-
-
 export default class ExpenseApiClient extends BaseApiClient {
-  private static resourceUrl = API_BASE_URL+API_URL_PATHS.expense;
+  private static resourceUrl = API_BASE_URL + API_URL_PATHS.expense;
 
   constructor() {
     super(ExpenseApiClient.resourceUrl);

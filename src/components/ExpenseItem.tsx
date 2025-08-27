@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import type {IExpenseFormValues} from "@src/types/expenseForm";
+import type { IExpenseFormValues } from "@src/types/expenseForm";
 import type { IExpense } from "@src/types/expense";
 import Input from "@src/components/common/Input";
 import Button from "@src/components/common/Button";
@@ -11,8 +11,6 @@ import { expenseSchema } from "@src/schemas/expenseSchema";
 interface IExpenseItemProps {
   expense: IExpense;
 }
-
-
 
 export default function ExpenseItem({ expense }: IExpenseItemProps) {
   const [isEditing, setIsEditing] = useState(false);
@@ -33,7 +31,7 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
     },
   });
 
-  const onSubmit = (data:IExpenseFormValues) => {
+  const onSubmit = (data: IExpenseFormValues) => {
     updateExpense(expense.id, { name: data.name, amount: data.amount });
     setIsEditing(false);
     reset({ name: "", amount: 0 });
@@ -81,7 +79,7 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
             <span>${expense.amount.toFixed(2)}</span>
           </div>
           <div className="flex gap-2 ml-4">
-            <Button onClick={() => setIsEditing(true)} buttonText="Update" />
+            <Button onClick={() => setIsEditing(true)} buttonText="Edit" />
             <Button
               onClick={() => deleteExpense(expense.id)}
               variant="danger"

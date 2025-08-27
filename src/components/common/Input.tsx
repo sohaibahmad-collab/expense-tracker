@@ -5,7 +5,6 @@ interface IInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   error?: string;
-
 }
 export default function Input({
   label,

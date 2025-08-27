@@ -18,14 +18,13 @@ import type { IExpense } from "@src/types/expense";
 import expenseApiClient from "@src/api/expense-manager/expenseApiClient";
 import type { RootState } from "@src/store/store";
 
-
 const client = new expenseApiClient();
 
 const selectExpenses = (state: RootState) => state.expenses.items;
 
 function* fetchExpensesSaga() {
   try {
-    const data: IExpense[] = yield call([client, client.getExpenses]); 
+    const data: IExpense[] = yield call([client, client.getExpenses]);
     if (data.length > 0) {
       toast.success("data fetched successfully");
       yield put(fetchExpensesSuccess(data));

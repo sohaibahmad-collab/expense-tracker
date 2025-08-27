@@ -13,7 +13,7 @@ export default function App() {
         <ExpenseForm />
         <ExpenseList />
       </div>
-      <ToastContainar/>
+      <ToastContainar />
     </>
   );
 }

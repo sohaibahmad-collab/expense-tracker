@@ -3,17 +3,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "@src/components/common/Input";
 import Button from "@src/components/common/Button";
 import { useAddExpense } from "@src/hooks/useAddExpense";
-import type {IExpenseFormValues} from "@src/types/expenseForm";
+import type { IExpenseFormValues } from "@src/types/expenseForm";
 import { expenseSchema } from "@src/schemas/expenseSchema";
 import { toast } from "react-toastify";
 
-
-
 export default function ExpenseForm() {
-
   let addExpense = useAddExpense();
 
-   const {
+  const {
     control,
     handleSubmit,
     reset,
@@ -24,7 +21,7 @@ export default function ExpenseForm() {
   });
 
   const onSubmit = (data: IExpenseFormValues) => {
-    if(data.name.trim() === "" ){
+    if (data.name.trim() === "") {
       toast.error("Name cannot be empty");
       return;
     }
@@ -45,12 +42,11 @@ export default function ExpenseForm() {
               value={field.value}
               onChange={field.onChange}
               placeholder="Name"
-              error={errors.name?.message} 
+              error={errors.name?.message}
             />
           )}
         />
 
-     
         <Controller
           name="amount"
           control={control}
@@ -61,17 +57,12 @@ export default function ExpenseForm() {
               value={field.value}
               onChange={(e) => field.onChange(Number(e.target.value))}
               placeholder="Amount"
-              error={errors.amount?.message} 
+              error={errors.amount?.message}
             />
           )}
         />
 
-      
-        <Button
-          type="submit"
-          buttonText="Add Expense"
-          disabled={!isValid} 
-        />
+        <Button type="submit" buttonText="Add Expense" disabled={!isValid} />
       </form>
     </div>
   );

@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IExpense } from "@src/types/expense";
 
-
 interface IExpensesState {
   items: IExpense[];
   loading: boolean;
@@ -30,19 +29,19 @@ const expensesSlice = createSlice({
       state.loading = false;
     },
 
-    addExpenseRequest: (state, _action: PayloadAction<Omit<IExpense, "id">>) => {
+    addExpenseRequest: (
+      state,
+      _action: PayloadAction<Omit<IExpense, "id">>
+    ) => {
       state.loading = true;
-      
     },
     addExpenseSuccess: (state, action: PayloadAction<IExpense>) => {
       state.items.push(action.payload);
       state.loading = false;
-     
     },
     addExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-      
     },
 
     updateExpenseRequest: (
@@ -56,12 +55,10 @@ const expensesSlice = createSlice({
         exp.id === action.payload.id ? action.payload : exp
       );
       state.loading = false;
-      
     },
     updateExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-     
     },
 
     deleteExpenseRequest: (state, _action: PayloadAction<string>) => {
@@ -70,12 +67,10 @@ const expensesSlice = createSlice({
     deleteExpenseSuccess: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((exp) => exp.id !== action.payload);
       state.loading = false;
-      
     },
     deleteExpenseFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
-     
     },
   },
 });
