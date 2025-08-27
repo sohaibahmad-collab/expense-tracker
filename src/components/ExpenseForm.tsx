@@ -5,6 +5,7 @@ import Button from "@src/components/common/Button";
 import { useAddExpense } from "@src/hooks/useAddExpense";
 import type {IExpenseFormValues} from "@src/types/expenseForm";
 import { expenseSchema } from "@src/schemas/expenseSchema";
+import { toast } from "react-toastify";
 
 
 
@@ -23,6 +24,10 @@ export default function ExpenseForm() {
   });
 
   const onSubmit = (data: IExpenseFormValues) => {
+    if(data.name.trim() === "" ){
+      toast.error("Name cannot be empty");
+      return;
+    }
     addExpense(data);
     reset({ name: "", amount: 0 });
   };
