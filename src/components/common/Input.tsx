@@ -19,15 +19,20 @@ export default function Input({
       <label className="block text-sm font-medium text-gray-700 mb-1">
         {label}
       </label>
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 `}
-      />
-      <div className="h-5 mt-1">
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      <div className="relative">
+        <input
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className={`w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 `}
+        />
+
+        {error && (
+          <p className="absolute h-9 w-70  top-9 left-0 text-red-500 text-[12px] mt-1">
+            {error}
+          </p>
+        )}
       </div>
     </div>
   );

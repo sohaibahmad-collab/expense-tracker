@@ -8,6 +8,7 @@ import Button from "@src/components/common/Button";
 import { useDeleteExpense } from "@src/hooks/useDeleteExpense";
 import { useUpdateExpense } from "@src/hooks/useUpdateExpense";
 import { expenseSchema } from "@src/schemas/expenseSchema";
+import { toast } from "react-toastify";
 interface IExpenseItemProps {
   expense: IExpense;
 }
@@ -32,6 +33,10 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
   });
 
   const onSubmit = (data: IExpenseFormValues) => {
+    if (data.name.trim() === "") {
+      toast.error("Name cannot be empty");
+      return;
+    }
     updateExpense(expense.id, { name: data.name, amount: data.amount });
     setIsEditing(false);
     reset({ name: "", amount: 0 });
@@ -71,8 +76,7 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
             )}
           />
           <div>
-          <Button type="submit" buttonText="Save" disabled={!isValid} />
-           <div className="h-5 mt-1"></div>
+            <Button type="submit" buttonText="Save" disabled={!isValid} />
           </div>
         </form>
       ) : (
@@ -80,15 +84,15 @@ export default function ExpenseItem({ expense }: IExpenseItemProps) {
           <div className="flex justify-between w-full">
             <span>{expense.name}</span>
             <span>${expense.amount.toFixed(2)}</span>
-          
-          <div className="flex gap-2 ml-4">
-            <Button onClick={() => setIsEditing(true)} icon="edit" />
-            <Button
-              onClick={() => deleteExpense(expense.id)}
-              variant="danger"
-              icon="delete"
-            />
-          </div>
+
+            <div className="flex gap-2 ml-4">
+              <Button onClick={() => setIsEditing(true)} icon="edit" />
+              <Button
+                onClick={() => deleteExpense(expense.id)}
+                variant="danger"
+                icon="delete"
+              />
+            </div>
           </div>
         </>
       )}

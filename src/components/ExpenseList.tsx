@@ -11,7 +11,7 @@ export default function ExpenseList() {
     <div>
       <h2 className="text-lg font-medium mb-3">Expenses</h2>
 
-      {loading ? (
+      {loading && expenses == null ? (
         <div className="flex justify-center items-center py-10">
           <Spinner />
         </div>

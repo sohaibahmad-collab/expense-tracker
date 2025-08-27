@@ -8,7 +8,7 @@ export default function App() {
   useFetchExpenses();
   return (
     <>
-      <div className="max-w-md mx-auto mt-10 bg-white shadow rounded-2xl p-6">
+      <div className="max-w-md mx-auto mt-10 bg-white shadow rounded-2xl p-6 ">
         <Header />
         <ExpenseForm />
         <ExpenseList />
